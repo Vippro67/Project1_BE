@@ -16,4 +16,6 @@ public class Booking {
     private String userId;
 
     private String tourId;
+
+    private String voucherId;
 }
