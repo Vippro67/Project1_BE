@@ -20,6 +20,11 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @GetMapping()
+    public List<Blog> getAllBlogs() {
+        return blogService.getAllBlogs();
+    }
+
     @GetMapping("/{tag}")
     public List<Blog> getBlogsByTag(@PathVariable String tag) {
         return blogService.getBlogsByTag(tag);

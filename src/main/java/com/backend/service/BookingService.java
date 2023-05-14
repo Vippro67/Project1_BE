@@ -20,6 +20,10 @@ public class BookingService {
     @Autowired
     private TourService tourService;
 
+    
+    public List<Booking> getAllBooking() {
+        return bookingRepository.findAll();
+    }
     public Booking createBooking(String userId, String tourId, Booking booking) {
         // Check if user and tour exist
         userService.getUserById(userId);

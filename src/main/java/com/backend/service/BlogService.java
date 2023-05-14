@@ -14,6 +14,9 @@ public class BlogService {
     @Autowired
     private BlogRepository blogRepository;
 
+    public List<Blog> getAllBlogs() {
+        return blogRepository.findAll();
+    }
     public List<Blog> getBlogsByTag(String tag) {
         return blogRepository.findByTag(tag);
     }
