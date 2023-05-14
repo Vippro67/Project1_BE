@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Destination {
     @Id
-    private String id;
+    private String _id;
 
     private String name;
 

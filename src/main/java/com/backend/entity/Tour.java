@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Tour {
     @Id
-    private String id;
+    private String _id;
 
     private String destinationId;
 

@@ -20,6 +20,11 @@ public class TourController {
     @Autowired
     private TourService tourService;
 
+    @GetMapping()
+    public List<Tour> getAllTours() {
+        return tourService.getAllTours();
+    }
+
     @GetMapping("/destination/{destinationId}")
     public List<Tour> getToursByDestinationId(@PathVariable String destinationId) {
         return tourService.getToursByDestinationId(destinationId);

@@ -20,6 +20,11 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @GetMapping()
+    public List<Booking> getAllBooking() {
+        return bookingService.getAllBooking();
+    }
+
     @PostMapping("/{userId}/{tourId}")
     public Booking createBooking(@PathVariable String userId, @PathVariable String tourId, @RequestBody Booking booking) {
         return bookingService.createBooking(userId, tourId, booking);

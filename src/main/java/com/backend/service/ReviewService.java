@@ -20,6 +20,7 @@ public class ReviewService {
     @Autowired
     private DestinationService destinationService;
 
+    
     public Review createReview(String userId, String destinationId, Review review) {
         // Check if user and destination exist
         userService.getUserById(userId);
@@ -27,6 +28,10 @@ public class ReviewService {
         review.setUserId(userId);
         review.setDestinationId(destinationId);
         return reviewRepository.save(review);
+    }
+
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
     }
 
     public List<Review> getReviewsByDestinationId(String destinationId) {

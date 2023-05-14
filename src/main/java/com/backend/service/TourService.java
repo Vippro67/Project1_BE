@@ -17,6 +17,12 @@ public class TourService {
     @Autowired
     private DestinationService destinationService;
 
+
+    public List<Tour> getAllTours() {
+        return tourRepository.findAll();
+    }
+
+
     public List<Tour> getToursByDestinationId(String destinationId) {
         return tourRepository.findByDestinationId(destinationId);
     }

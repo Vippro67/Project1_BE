@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.entity.User;
-import com.backend.service.UserService;
+import com.backend.entity.Voucher;
+import com.backend.service.VoucherService;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/voucher")
+public class VoucherController {
 
     @Autowired
-    private UserService userService;
+    private VoucherService voucherService;
     @GetMapping()
-    public List<User> getAllTours()
+    public List<Voucher> getAllTours()
     {
-        return userService.getAllUser();
+        return voucherService.getAllVoucher();
     }
 }

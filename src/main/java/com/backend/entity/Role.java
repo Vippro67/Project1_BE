@@ -8,23 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Document(collection = "users")
+@Document(collection = "role")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Role {
 
     @Id
     private String _id;
 
-    private String username;
-    
-    private String password;
-    
-    private String phoneNumber;
-    
-    private String email;
-    
-    private String fullName;
+    private String name;
 
 }

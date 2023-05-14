@@ -1,5 +1,7 @@
 package com.backend.entity;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -8,23 +10,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-@Document(collection = "users")
+@Document(collection = "voucher")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Voucher {
 
     @Id
     private String _id;
 
-    private String username;
+    private int number;
     
-    private String password;
+    private float value;
     
-    private String phoneNumber;
+    private LocalDateTime start;
     
-    private String email;
-    
-    private String fullName;
+    private LocalDateTime end;
 
 }

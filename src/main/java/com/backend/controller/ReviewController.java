@@ -20,6 +20,10 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
+    @GetMapping()
+    public List<Review> getAllReview() {
+        return reviewService.getAllReviews();
+    }
     @PostMapping("/{userId}/{destinationId}")
     public Review createReview(@PathVariable String userId, @PathVariable String destinationId, @RequestBody Review review) {
         return reviewService.createReview(userId, destinationId, review);

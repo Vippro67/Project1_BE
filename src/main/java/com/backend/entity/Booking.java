@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Booking {
-    private String id;
+    private String _id;
     
     private String userId;
 
