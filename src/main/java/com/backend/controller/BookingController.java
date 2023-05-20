@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.dto.BookingDTO;
 import com.backend.entity.Booking;
 import com.backend.service.BookingService;
 
@@ -21,7 +22,7 @@ public class BookingController {
     private BookingService bookingService;
 
     @GetMapping()
-    public List<Booking> getAllBooking() {
+    public List<BookingDTO> getAllBooking() {
         return bookingService.getAllBooking();
     }
 
@@ -31,13 +32,13 @@ public class BookingController {
     }
 
     @GetMapping("/user/{userId}")
-    public List<Booking> getBookingsByUserId(@PathVariable String userId) {
+    public List<BookingDTO> getBookingsByUserId(@PathVariable String userId) {
         return bookingService.getBookingsByUserId(userId);
     }
 
     @GetMapping("/tour/{tourId}")
-    public List<Booking> getBookingsByTourId(@PathVariable String tourId) {
-        return bookingService.getBookingsByTourId(tourId);
+    public List<BookingDTO> getBookingsByTourId(@PathVariable String tourId) {
+        return bookingService.getBookingsByUserId(tourId);
     }
 
 }

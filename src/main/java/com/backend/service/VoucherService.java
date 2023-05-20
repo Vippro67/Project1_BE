@@ -2,6 +2,7 @@ package com.backend.service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class VoucherService {
     public List<Voucher> getAllVoucher()
     {
         return voucherRepository.findAll();
+    }
+
+    public Optional<Voucher> getVoucherById(String voucherId) {
+        return voucherRepository.findById(voucherId);
     }
 
 }

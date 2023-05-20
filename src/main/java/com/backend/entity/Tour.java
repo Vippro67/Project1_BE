@@ -17,6 +17,8 @@ public class Tour {
     @Id
     private String _id;
 
+    private String tourName;
+
     private String destinationId;
 
     private LocalDateTime dateFrom;
@@ -24,4 +26,5 @@ public class Tour {
     private LocalDateTime dateTo;
 
     private Double price;
+
 }

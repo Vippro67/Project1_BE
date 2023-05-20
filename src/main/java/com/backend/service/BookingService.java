@@ -1,11 +1,17 @@
 package com.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.dto.BookingDTO;
 import com.backend.entity.Booking;
+import com.backend.entity.Tour;
+import com.backend.entity.User;
+import com.backend.entity.Voucher;
 import com.backend.repository.BookingRepository;
 
 @Service
@@ -20,25 +26,52 @@ public class BookingService {
     @Autowired
     private TourService tourService;
 
-    
-    public List<Booking> getAllBooking() {
-        return bookingRepository.findAll();
+    @Autowired
+    private VoucherService voucherService;
+
+    public List<BookingDTO> getAllBooking() {
+        List<Booking> listbooking = bookingRepository.findAll();
+        List<BookingDTO> listbookingDTO = new ArrayList<>();
+
+        Optional<Tour> tour;
+        Optional<User> user;
+        Optional<Voucher> voucher;
+
+        for (Booking booking : listbooking) {
+            user = userService.getUserById(booking.getUserId());
+            tour = tourService.getTourById(booking.getTourId());
+            voucher = voucherService.getVoucherById(booking.getVoucherId());
+            if (user.isPresent() && tour.isPresent()) {
+                if (voucher.isPresent()) {
+                    BookingDTO bookingDTO = new BookingDTO(booking, user.get(), tour.get(), voucher.get());
+                    listbookingDTO.add(bookingDTO);
+                } else {
+                    BookingDTO bookingDTO = new BookingDTO(booking, user.get(), tour.get());
+                    listbookingDTO.add(bookingDTO);
+                }
+            }
+        }
+
+        // User user ;
+        // Tour tour ;
+        // Voucher voucher ;
+
+        // for (Booking booking : listbooking) {
+        // user = userService.getUserById(booking.getUserId()).get();
+        // tour = tourService.getTourById(booking.getTourId()).get();
+        // voucher = voucherService.getVoucherById(booking.getVoucherId()).get();
+        // BookingDTO bookingDTO = new BookingDTO(booking,user,tour,voucher);
+
+        // listbookingDTO.add(bookingDTO);
+        // }
+        return listbookingDTO;
     }
+
     public Booking createBooking(String userId, String tourId, Booking booking) {
-        // Check if user and tour exist
-        userService.getUserById(userId);
-        tourService.getTourById(tourId);
-        booking.setUserId(userId);
-        booking.setTourId(tourId);
-        return bookingRepository.save(booking);
+        return null;
     }
 
-    public List<Booking> getBookingsByUserId(String userId) {
-        return bookingRepository.findByUserId(userId);
+    public List<BookingDTO> getBookingsByUserId(String userId) {
+        return null;
     }
-
-    public List<Booking> getBookingsByTourId(String tourId) {
-        return bookingRepository.findByTourId(tourId);
-    }
-
 }

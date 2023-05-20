@@ -1,6 +1,7 @@
 package com.backend.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,9 @@ public class TourService {
         return tourRepository.save(tour);
     }
 
-    public void getTourById(String tourId) {
+
+    public Optional<Tour> getTourById(String tourId) {
+        return tourRepository.findById(tourId);
     }
 
     // Other methods omitted for brevity

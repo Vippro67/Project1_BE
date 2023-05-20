@@ -24,4 +24,5 @@ public class Blog {
     private String tag;
 
     private LocalDateTime createdAt;
+
 }
