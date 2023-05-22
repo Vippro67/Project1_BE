@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.dto.TourDTO;
 import com.backend.entity.Tour;
 import com.backend.service.TourService;
 
@@ -21,7 +22,7 @@ public class TourController {
     private TourService tourService;
 
     @GetMapping()
-    public List<Tour> getAllTours() {
+    public List<TourDTO> getAllTours() {
         return tourService.getAllTours();
     }
 

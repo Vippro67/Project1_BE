@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.dto.ReviewDTO;
 import com.backend.entity.Review;
 import com.backend.service.ReviewService;
 
@@ -21,7 +22,7 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @GetMapping()
-    public List<Review> getAllReview() {
+    public List<ReviewDTO> getAllReview() {
         return reviewService.getAllReviews();
     }
     @PostMapping("/{userId}/{destinationId}")

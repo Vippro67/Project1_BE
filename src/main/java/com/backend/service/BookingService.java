@@ -51,19 +51,6 @@ public class BookingService {
                 }
             }
         }
-
-        // User user ;
-        // Tour tour ;
-        // Voucher voucher ;
-
-        // for (Booking booking : listbooking) {
-        // user = userService.getUserById(booking.getUserId()).get();
-        // tour = tourService.getTourById(booking.getTourId()).get();
-        // voucher = voucherService.getVoucherById(booking.getVoucherId()).get();
-        // BookingDTO bookingDTO = new BookingDTO(booking,user,tour,voucher);
-
-        // listbookingDTO.add(bookingDTO);
-        // }
         return listbookingDTO;
     }
 

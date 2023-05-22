@@ -1,11 +1,15 @@
 package com.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.dto.ReviewDTO;
 import com.backend.entity.Review;
+import com.backend.entity.User;
 import com.backend.repository.ReviewRepository;
 
 @Service
@@ -30,8 +34,21 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+    public List<ReviewDTO> getAllReviews() {
+        List<Review> listReview = reviewRepository.findAll();
+        List<ReviewDTO> listReviewDTO = new ArrayList<>();
+
+        Optional<User> user ;
+
+        for (Review review : listReview) {
+            user = userService.getUserById(review.getUserId());
+            if(user.isPresent())
+            {
+                ReviewDTO reviewDTO = new ReviewDTO(review,user.get());
+                listReviewDTO.add(reviewDTO);
+            }
+        }
+        return listReviewDTO;
     }
 
     public List<Review> getReviewsByDestinationId(String destinationId) {

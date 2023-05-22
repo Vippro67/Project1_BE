@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.dto.UserDTO;
 import com.backend.entity.User;
 import com.backend.service.UserService;
 
@@ -17,7 +18,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping()
-    public List<User> getAllUser()
+    public List<UserDTO> getAllUser()
     {
         return userService.getAllUser();
     }

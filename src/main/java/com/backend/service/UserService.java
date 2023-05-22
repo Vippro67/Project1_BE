@@ -1,11 +1,13 @@
 package com.backend.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.dto.UserDTO;
 import com.backend.entity.User;
 import com.backend.repository.UserRepository;
 
@@ -29,13 +31,20 @@ public class UserService {
         }
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
-
     }
+
     public Optional<User> getUserById(String id)
     {
         return userRepository.findById(id);
     }
-    public List<User> getAllUser() {
-        return userRepository.findAll();
+    public List<UserDTO> getAllUser() {
+        List<User> listUser = userRepository.findAll();
+        List<UserDTO> listUserDTO = new ArrayList<>();
+
+        for (User user: listUser) {
+            UserDTO userDTO = new UserDTO(user);
+            listUserDTO.add(userDTO);
+        }
+        return listUserDTO;
     }
 }
