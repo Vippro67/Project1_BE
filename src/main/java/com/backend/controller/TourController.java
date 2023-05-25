@@ -31,8 +31,8 @@ public class TourController {
         return tourService.getToursByDestinationId(destinationId);
     }
 
-    @PostMapping("/destination/{destinationId}")
-    public Tour createTour(@PathVariable String destinationId, @RequestBody Tour tour) {
-        return tourService.createTour(destinationId, tour);
+    @PostMapping()
+    public Tour createTour(@RequestBody Tour tour) {
+        return tourService.createTour(tour);
     }
 }

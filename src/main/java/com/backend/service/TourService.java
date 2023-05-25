@@ -44,10 +44,8 @@ public class TourService {
         return tourRepository.findByDestinationId(destinationId);
     }
 
-    public Tour createTour(String destinationId, Tour tour) {
+    public Tour createTour(Tour tour) {
         // Check if destination exists
-        destinationService.getDestinationById(destinationId);
-        tour.setDestinationId(destinationId);
         return tourRepository.save(tour);
     }
 

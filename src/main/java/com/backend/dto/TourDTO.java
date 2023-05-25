@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 public class TourDTO {
     private String _id;
 
+    private String tourName;
+
     private String destination;
 
     private LocalDateTime dateFrom;
@@ -26,6 +28,7 @@ public class TourDTO {
     public TourDTO(Tour tour,Destination destination)
     {
         this._id = tour.get_id();
+        this.tourName = tour.getTourName();
         this.destination = destination.getName();
         this.dateFrom = tour.getDateFrom();
         this.dateTo = tour.getDateTo();

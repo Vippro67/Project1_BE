@@ -25,4 +25,8 @@ public class VoucherService {
         return voucherRepository.findById(voucherId);
     }
 
+    public Voucher createVoucher(Voucher voucher)
+    {
+        return voucherRepository.save(voucher);
+    }
 }
