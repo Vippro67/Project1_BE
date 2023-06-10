@@ -13,12 +13,20 @@ public class BlogService {
 
     @Autowired
     private BlogRepository blogRepository;
+    public Object getBlogById;
 
     public List<Blog> getAllBlogs() {
         return blogRepository.findAll();
     }
+
+    public Blog getBlogById(String id) {
+        return blogRepository.findById(id).get();
+    }
     public List<Blog> getBlogsByTag(String tag) {
         return blogRepository.findByTag(tag);
+    }
+    public List<Blog> getBlogsByTitle(String title) {
+        return blogRepository.findByTitle(title);
     }
 
     public Blog createBlog(Blog blog) {

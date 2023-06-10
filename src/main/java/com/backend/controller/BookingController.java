@@ -15,7 +15,7 @@ import com.backend.entity.Booking;
 import com.backend.service.BookingService;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("api/v1//bookings")
 public class BookingController {
 
     @Autowired

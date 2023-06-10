@@ -15,7 +15,7 @@ import com.backend.entity.Review;
 import com.backend.service.ReviewService;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("api/v1//reviews")
 public class ReviewController {
 
     @Autowired

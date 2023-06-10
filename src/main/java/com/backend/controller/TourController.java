@@ -15,7 +15,7 @@ import com.backend.entity.Tour;
 import com.backend.service.TourService;
 
 @RestController
-@RequestMapping("/tours")
+@RequestMapping("api/v1//tours")
 public class TourController {
 
     @Autowired

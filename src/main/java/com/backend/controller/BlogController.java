@@ -14,7 +14,7 @@ import com.backend.entity.Blog;
 import com.backend.service.BlogService;
 
 @RestController
-@RequestMapping("/blogs")
+@RequestMapping("api/v1/blogs")
 public class BlogController {
 
     @Autowired
@@ -24,8 +24,15 @@ public class BlogController {
     public List<Blog> getAllBlogs() {
         return blogService.getAllBlogs();
     }
-
-    @GetMapping("/{tag}")
+    @GetMapping("/id/{id}")
+    public Blog getBlogById(@PathVariable String id) {
+        return blogService.getBlogById(id);
+    }
+    @GetMapping("/title/{title}")
+    public List<Blog> getBlogsByTitle(@PathVariable String title) {
+        return blogService.getBlogsByTitle(title);
+    }
+    @GetMapping("/tag/{tag}")
     public List<Blog> getBlogsByTag(@PathVariable String tag) {
         return blogService.getBlogsByTag(tag);
     }

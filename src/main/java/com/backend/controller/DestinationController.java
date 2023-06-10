@@ -15,7 +15,7 @@ import com.backend.entity.Destination;
 import com.backend.service.DestinationService;
 
 @RestController
-@RequestMapping("/destinations")
+@RequestMapping("api/v1//destinations")
 public class DestinationController {
 
     @Autowired

@@ -13,7 +13,7 @@ import com.backend.entity.Voucher;
 import com.backend.service.VoucherService;
 
 @RestController
-@RequestMapping("/voucher")
+@RequestMapping("api/v1//voucher")
 public class VoucherController {
 
     @Autowired
