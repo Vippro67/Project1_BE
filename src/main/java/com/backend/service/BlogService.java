@@ -3,6 +3,9 @@ package com.backend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.backend.entity.Blog;
@@ -15,10 +18,11 @@ public class BlogService {
     private BlogRepository blogRepository;
     public Object getBlogById;
 
-    public List<Blog> getAllBlogs() {
-        return blogRepository.findAll();
-    }
-
+    public List<Blog> getAllBlogs(int page, int size) {
+    Pageable pageable = PageRequest.of(page - 1, size);
+    Page<Blog> blogPage = blogRepository.findAll(pageable);
+    return blogPage.getContent();
+}
     public Blog getBlogById(String id) {
         return blogRepository.findById(id).get();
     }

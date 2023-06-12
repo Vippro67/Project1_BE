@@ -5,9 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.backend.dto.BookingDTO;
+import com.backend.entity.Blog;
 import com.backend.entity.Booking;
 import com.backend.entity.Tour;
 import com.backend.entity.User;
@@ -29,8 +33,9 @@ public class BookingService {
     @Autowired
     private VoucherService voucherService;
 
-    public List<BookingDTO> getAllBooking() {
-        List<Booking> listbooking = bookingRepository.findAll();
+    public List<BookingDTO> getAllBooking(int page, int size) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        Page<Booking> listbooking = bookingRepository.findAll(pageable);
         List<BookingDTO> listbookingDTO = new ArrayList<>();
 
         Optional<Tour> tour;

@@ -9,21 +9,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.entity.Destination;
 import com.backend.service.DestinationService;
 
 @RestController
-@RequestMapping("api/v1//destinations")
+@RequestMapping("api/v1/destinations")
 public class DestinationController {
 
     @Autowired
     private DestinationService destinationService;
 
     @GetMapping
-    public List<Destination> getAllDestinations() {
-        return destinationService.getAllDestinations();
+    public List<Destination> getAllDestinations(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+        return destinationService.getAllDestinations(page, size);
     }
 
     @GetMapping("/{id}")

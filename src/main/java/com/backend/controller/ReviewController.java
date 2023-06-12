@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.dto.ReviewDTO;
@@ -15,15 +16,15 @@ import com.backend.entity.Review;
 import com.backend.service.ReviewService;
 
 @RestController
-@RequestMapping("api/v1//reviews")
+@RequestMapping("api/v1/reviews")
 public class ReviewController {
 
     @Autowired
     private ReviewService reviewService;
 
     @GetMapping()
-    public List<ReviewDTO> getAllReview() {
-        return reviewService.getAllReviews();
+    public List<ReviewDTO> getAllReview(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+        return reviewService.getAllReviews(page, size);
     }
     @PostMapping("/{userId}/{destinationId}")
     public Review createReview(@PathVariable String userId, @PathVariable String destinationId, @RequestBody Review review) {
