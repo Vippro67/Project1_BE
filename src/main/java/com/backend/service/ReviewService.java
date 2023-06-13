@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.backend.dto.ReviewDTO;
-import com.backend.entity.Blog;
 import com.backend.entity.Review;
 import com.backend.entity.User;
 import com.backend.repository.ReviewRepository;

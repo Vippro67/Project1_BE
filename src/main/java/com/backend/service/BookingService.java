@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.backend.dto.BookingDTO;
-import com.backend.entity.Blog;
 import com.backend.entity.Booking;
 import com.backend.entity.Tour;
 import com.backend.entity.User;
