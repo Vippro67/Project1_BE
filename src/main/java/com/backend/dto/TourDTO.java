@@ -23,6 +23,8 @@ public class TourDTO {
 
     private LocalDateTime dateTo;
 
+    private String schedule;
+
     private Double price;
 
     public TourDTO(Tour tour,Destination destination)
@@ -32,6 +34,7 @@ public class TourDTO {
         this.destination = destination.getName();
         this.dateFrom = tour.getDateFrom();
         this.dateTo = tour.getDateTo();
+        this.schedule = tour.getSchedule();
         this.price = tour.getPrice();
     }
 

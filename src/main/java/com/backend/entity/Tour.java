@@ -25,6 +25,8 @@ public class Tour {
 
     private LocalDateTime dateTo;
 
+    private String schedule;
+
     private Double price;
 
 }

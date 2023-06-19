@@ -21,5 +21,7 @@ public class Destination {
 
     private String location;
 
+    private String main_img;
+
     private String[] img;
 }

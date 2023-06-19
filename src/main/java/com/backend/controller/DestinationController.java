@@ -23,7 +23,7 @@ public class DestinationController {
     private DestinationService destinationService;
 
     @GetMapping
-    public List<Destination> getAllDestinations(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
+    public List<Destination> getAllDestinations(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "9") int size) {
         return destinationService.getAllDestinations(page, size);
     }
 
