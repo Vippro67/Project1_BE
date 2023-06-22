@@ -3,6 +3,10 @@ spring:
     mongodb:
       uri : ${URIMONGO}
       database : Project1
+  security : 
+    user :
+      name : ${USER}
+      password : ${PASSWORD}
 application:
   security:
     secretKey: ${SECRETKEY}
