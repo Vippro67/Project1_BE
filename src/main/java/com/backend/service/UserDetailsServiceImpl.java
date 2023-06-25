@@ -53,11 +53,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
 
         // Create new user
-         Integer maxId = userRepository.findMaxId();
+         long maxId = userRepository.count();
+         while(userRepository.findById(String.valueOf(maxId)).isPresent()) {
+             maxId++;
+         }
 
     // Create new user
         com.backend.entity.User user = new com.backend.entity.User();
-        user.set_id(maxId != null ? String.valueOf(maxId + 1) : "1"); // Set new ID as max ID + 1 or 1 if no existing users
+        user.set_id(String.valueOf(maxId)); // Set new ID as max ID + 1 or 1 if no existing users
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setRoleId(roleRepository.findByRoleName(userRole).get().get_id());

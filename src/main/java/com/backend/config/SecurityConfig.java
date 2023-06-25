@@ -54,8 +54,8 @@ public class SecurityConfig {
         // Authorize http requests
         http.authorizeHttpRequests()
                 .requestMatchers("/").permitAll()
-                .requestMatchers("/api/v1/auth/token").permitAll()
-                .requestMatchers("/api/v1/auth/createUser").permitAll()
+                .requestMatchers("/api/v1/auth/signin/**").permitAll()
+                .requestMatchers("/api/v1/auth/createUser/**").permitAll()
                 .anyRequest().authenticated();
 
         // Add JWT authentication filter

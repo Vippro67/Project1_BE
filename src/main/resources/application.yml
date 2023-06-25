@@ -3,13 +3,7 @@ spring:
     mongodb:
       uri : ${URIMONGO}
       database : Project1
-  security : 
-    user :
-      name : ${USER}
-      password : ${PASSWORD}
 application:
   security:
-    secretKey: ${SECRETKEY}
+    secret: ${SECRETKEY}
     expiration: 84600000
-    refresh-token:
-      expiration: 604800000

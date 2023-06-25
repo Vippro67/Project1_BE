@@ -17,7 +17,4 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query(value = "{'username' : ?0 }", exists = true)
     boolean existsByUsername(String username);
-
-    @Query(value = "{$group: {_id: null, maxId: {$max: '$id'}}}")
-    Integer findMaxId();
 }

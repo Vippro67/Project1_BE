@@ -13,11 +13,12 @@ import java.util.Date;
 @Component
 public class JwtProvider {
     // Jwt Secret
-    @Value("${application.security.secretKey}")
+    @Value("${application.security.secret}")
     private String jwtSecret;
 
     // Jwt Expiration in millis
-    private Long jwtExpiration = 60000L;
+    @Value("${application.security.expiration}")
+    private Long jwtExpiration;
 
     private Claims parseToken(String token) {
         // Create JwtParser
