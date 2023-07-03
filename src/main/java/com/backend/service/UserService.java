@@ -21,32 +21,43 @@ public class UserService {
 
     public User createUser(User user) {
         // Check if username or email already exists
-        if (userRepository.findByUsername(user.getUsername()) != null) {
-           // throw new UserAlreadyExistsException("Username already exists");
+        Optional<User> userCheckPhone = userRepository.findByPhone(user.getPhoneNumber());
+        Optional<User> userCheckEmail = userRepository.findByEmail(user.getEmail());
+        if(userCheckPhone.isPresent()) {
+            return userCheckPhone.get();
         }
-        if (userRepository.findByEmail(user.getEmail()) != null) {
-          //  throw new UserAlreadyExistsException("Email already exists");
+        else if(userCheckEmail.isPresent()) {
+            return userCheckEmail.get();
         }
-        return userRepository.save(user);
+        else
+        {
+            return userRepository.save(user);
+        }
     }
-    public  Optional <User> getUserByEmail(String email) {
-            return userRepository.findByEmail(email);
-        }
-    public  Optional <User> getUserByUsername(String username) {
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public Optional<User> getUserById(String id)
-    {
+    public Optional<User> getUserByPhone(String phone) {
+        return userRepository.findByPhone(phone);
+    }
+
+    public Optional<User> getUserById(String id) {
         return userRepository.findById(id);
     }
+
     public List<UserDTO> getAllUser(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        
+
         Page<User> listUser = userRepository.findAll(pageable);
         List<UserDTO> listUserDTO = new ArrayList<>();
 
-        for (User user: listUser) {
+        for (User user : listUser) {
             UserDTO userDTO = new UserDTO(user);
             listUserDTO.add(userDTO);
         }

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import com.backend.dto.AuthRequest;
 import com.backend.dto.CreateUserReq;
-import com.backend.entity.User;
 import com.backend.security.JwtProvider;
 import com.backend.service.UserDetailsServiceImpl;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
@@ -23,21 +23,28 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/signin")
-    public String getToken(@RequestBody AuthRequest authRequest) throws Exception {
+    @PostMapping("/signin")
+    public String getToken(@RequestBody AuthRequest authRequest) {
         // Get user details
         UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getUsername());
-
         if(passwordEncoder.matches(authRequest.getPassword(), userDetails.getPassword())){
             // Generate token
             return jwtProvider.generateToken(authRequest.getUsername());
         }
-
-        throw new Exception("User details invalid.");
+        else{
+            return "Wrong password";
+        }
     }
 
-    @PostMapping("/createUser")
-    public User createUser(@RequestBody CreateUserReq req) throws Exception {
-        return userDetailsService.createUser(req);
+    @PostMapping("/signup")
+    public String createUser(@RequestBody CreateUserReq req){
+        try {
+            return userDetailsService.createUser(req);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "Error";
+        
     }
 }

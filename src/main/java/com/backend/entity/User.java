@@ -27,6 +27,6 @@ public class User {
     
     private String fullName;
 
-    private String roleId;
+    private String roleId = "1";
 
 }

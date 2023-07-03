@@ -58,6 +58,12 @@ public class TourService {
         return tourRepository.findById(tourId);
     }
 
+    public TourDTO getTourDTOById(String tourId) {
+        Optional<Tour> tour = tourRepository.findById(tourId);
+        Optional<Destination> destination = destinationService.getDestinationById(tour.get().getDestinationId());
+        TourDTO tourDTO = new TourDTO(tour.get(),destination.get());
+        return tourDTO;
+    }
     // Other methods omitted for brevity
 
 }

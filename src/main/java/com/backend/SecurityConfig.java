@@ -1,4 +1,4 @@
-package com.backend.config;
+package com.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +17,6 @@ import com.backend.security.JwtAuthFilter;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
     @Autowired
     private JwtAuthEntryPoint jwtAuthEntryPoint;
@@ -53,10 +52,7 @@ public class SecurityConfig {
 
         // Authorize http requests
         http.authorizeHttpRequests()
-                .requestMatchers("/").permitAll()
-                .requestMatchers("/api/v1/auth/signin/**").permitAll()
-                .requestMatchers("/api/v1/auth/createUser/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         // Add JWT authentication filter
         http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);

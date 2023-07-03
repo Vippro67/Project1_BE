@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.backend.dto.CreateUserReq;
 import com.backend.repository.RoleRepository;
 import com.backend.repository.UserRepository;
+import com.backend.security.JwtProvider;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
-
+    @Autowired
+    private JwtProvider jwtProvider;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -37,9 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return new User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
-    
 
-    public com.backend.entity.User createUser(CreateUserReq req) throws Exception {
+    public String createUser(CreateUserReq req) throws Exception {
         // Extract parameters from request
         String username = req.getUsername();
         String password = req.getPassword();
@@ -49,16 +50,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean isExists = userRepository.existsByUsername(username);
 
         if (isExists) {
-            throw new Exception("User already exists.");
+            return ("User already exists.");
         }
 
         // Create new user
-         long maxId = userRepository.count();
-         while(userRepository.findById(String.valueOf(maxId)).isPresent()) {
-             maxId++;
-         }
+        long maxId = userRepository.count();
+        while (userRepository.findById(String.valueOf(maxId)).isPresent()) {
+            maxId++;
+        }
 
-    // Create new user
+        // Create new user
         com.backend.entity.User user = new com.backend.entity.User();
         user.set_id(String.valueOf(maxId)); // Set new ID as max ID + 1 or 1 if no existing users
         user.setUsername(username);
@@ -66,6 +67,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.setRoleId(roleRepository.findByRoleName(userRole).get().get_id());
 
         // Save user
-        return userRepository.save(user);
+        userRepository.save(user);
+        return jwtProvider.generateToken(user.getUsername());
     }
 }

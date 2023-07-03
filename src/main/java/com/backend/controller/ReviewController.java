@@ -3,6 +3,7 @@ package com.backend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.backend.dto.ReviewDTO;
 import com.backend.entity.Review;
 import com.backend.service.ReviewService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1/reviews")
 public class ReviewController {
@@ -32,7 +34,7 @@ public class ReviewController {
     }
 
     @GetMapping("/destination/{destinationId}")
-    public List<Review> getReviewsByDestinationId(@PathVariable String destinationId) {
+    public List<ReviewDTO> getReviewsByDestinationId(@PathVariable String destinationId) {
         return reviewService.getReviewsByDestinationId(destinationId);
     }
 

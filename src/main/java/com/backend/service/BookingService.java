@@ -58,17 +58,54 @@ public class BookingService {
         return listbookingDTO;
     }
 
-    public Booking createBooking(String userId, String tourId, Booking booking) {
-        
+    public Booking createBooking(String userId, String tourId, String voucherId) {
+        Booking booking = new Booking();
         booking.setUserId(userId);
         booking.setTourId(tourId);
+        if (voucherId == null) {
+            voucherId = "";
+        }
+        booking.setVoucherId(voucherId);
+        booking.setStatus("Pending");
         return bookingRepository.save(booking);
     }
-
+    public Booking updateBooking(String bookingId, String status) {
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+        if (booking.isPresent()) {
+            booking.get().setStatus(status);
+            return bookingRepository.save(booking.get());
+        }
+        return null;
+    }
+    public BookingDTO getBookingDTOById(String bookingId)
+    {
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+        if(!booking.isPresent()) {
+            return null;
+        }
+        else
+        {
+            Optional<Tour> tour = tourService.getTourById(booking.get().getTourId());
+            Optional<User> user = userService.getUserById(booking.get().getUserId());
+            if(booking.get().getVoucherId() == null) {
+                booking.get().setVoucherId("");
+            }
+            Optional<Voucher> voucher = voucherService.getVoucherById(booking.get().getVoucherId());
+            if (user.isPresent() && tour.isPresent()) {
+                if (voucher.isPresent()) {
+                    BookingDTO bookingDTO = new BookingDTO(booking.get(), user.get(), tour.get(), voucher.get());
+                    return bookingDTO;
+                } else {
+                    BookingDTO bookingDTO = new BookingDTO(booking.get(), user.get(), tour.get());
+                    return bookingDTO;
+                }
+            }
+            return null;
+        }
+    }
     public List<BookingDTO> getBookingsByUserId(String userId) {
         List<Booking> listbooking = bookingRepository.findByUserId(userId);
         List<BookingDTO> listbookingDTO = new ArrayList<>();
-
         Optional<Tour> tour;
         Optional<User> user;
         Optional<Voucher> voucher;
@@ -92,7 +129,6 @@ public class BookingService {
     public List<BookingDTO> getBookingsByTourId(String tourId) {
         List<Booking> listbooking = bookingRepository.findByTourId(tourId);
         List<BookingDTO> listbookingDTO = new ArrayList<>();
-
         Optional<Tour> tour;
         Optional<User> user;
         Optional<Voucher> voucher;

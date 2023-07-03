@@ -55,7 +55,18 @@ public class ReviewService {
         return listReviewDTO;
     }
 
-    public List<Review> getReviewsByDestinationId(String destinationId) {
-        return reviewRepository.findByDestinationId(destinationId);
+    public List<ReviewDTO> getReviewsByDestinationId(String destinationId) {
+        List<Review> listReview = reviewRepository.findByDestinationId(destinationId);
+        List<ReviewDTO> listReviewDTO = new ArrayList<>();
+        Optional<User> user ;
+        for (Review review : listReview) {
+            user = userService.getUserById(review.getUserId());
+            if(user.isPresent())
+            {
+                ReviewDTO reviewDTO = new ReviewDTO(review,user.get());
+                listReviewDTO.add(reviewDTO);
+            }
+        }
+        return listReviewDTO;
     }  
 }

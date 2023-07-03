@@ -17,4 +17,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query(value = "{'username' : ?0 }", exists = true)
     boolean existsByUsername(String username);
+
+    @Query(value = "{'phoneNumber' : ?0 }")
+    Optional<User>  findByPhone(String phoneNumber);
 }

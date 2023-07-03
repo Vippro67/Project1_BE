@@ -29,6 +29,8 @@ public class BookingDTO {
 
     private float valueVoucher;
 
+    private String status;
+
     public BookingDTO(Booking booking,User user, Tour tour, Voucher voucher)
     {
         this._id=booking.get_id();
@@ -38,6 +40,7 @@ public class BookingDTO {
         this.dateTo=tour.getDateTo();
         this.price=tour.getPrice();
         this.valueVoucher=voucher.getValue();
+        this.status=booking.getStatus();
     }
 
     public BookingDTO(Booking booking,User user, Tour tour)
@@ -49,5 +52,6 @@ public class BookingDTO {
         this.dateTo=tour.getDateTo();
         this.price=tour.getPrice();
         this.valueVoucher = 0 ;
+        this.status=booking.getStatus();
     }
 }

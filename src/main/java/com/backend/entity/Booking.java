@@ -18,4 +18,6 @@ public class Booking {
     private String tourId;
 
     private String voucherId;
+
+    private String status;
 }

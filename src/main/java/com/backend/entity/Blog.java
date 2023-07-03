@@ -19,7 +19,11 @@ public class Blog {
 
     private String title;
 
+    private String image;
+
     private String content;
+
+    private String detailContent;
 
     private String tag;
 
