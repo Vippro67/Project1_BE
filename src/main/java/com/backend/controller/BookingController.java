@@ -45,9 +45,6 @@ public class BookingController {
     public List<BookingDTO> getBookingsByTourId(@PathVariable String tourId) {
         return bookingService.getBookingsByUserId(tourId);
     }
-
-    
-
     @GetMapping("/{id}")
     public BookingDTO getBookingById(@PathVariable String id) {
         return bookingService.getBookingDTOById(id);

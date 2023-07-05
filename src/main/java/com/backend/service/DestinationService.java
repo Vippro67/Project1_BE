@@ -11,12 +11,16 @@ import org.springframework.stereotype.Service;
 
 import com.backend.entity.Destination;
 import com.backend.repository.DestinationRepository;
+import com.backend.repository.TourRepository;
 
 @Service
 public class DestinationService {
 
     @Autowired
     private DestinationRepository destinationRepository;
+
+    @Autowired
+    private TourRepository tourRepository;
     
     public Optional<Destination> getDestinationById(String destinationId) {
         
@@ -31,6 +35,25 @@ public class DestinationService {
 
     public Destination createDestination(Destination destination) {
         return destinationRepository.save(destination);
+    }
+
+    public Destination updateDestination(String id, Destination destination) {
+        Destination destinationToUpdate = destinationRepository.findById(id).get();
+        destinationToUpdate.setName(destination.getName());
+        destinationToUpdate.setDescription(destination.getDescription());
+        destinationToUpdate.setMain_img(destination.getMain_img());
+        destinationToUpdate.setLocation(destination.getLocation());
+        destinationToUpdate.setImg(destination.getImg());
+        return destinationRepository.save(destinationToUpdate);
+    }
+
+    public String deleteDestination(String id) {
+
+        if(tourRepository.findByDestinationId(id).size() > 0)
+            return "Destination with id " + id + " is being used by a tour! Cannot delete!";
+
+        destinationRepository.deleteById(id);
+        return "Destination with id " + id + " has been deleted!";
     }
     
 }

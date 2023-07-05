@@ -68,5 +68,10 @@ public class ReviewService {
             }
         }
         return listReviewDTO;
+    }
+
+    public String deleteReview(String id) {
+        reviewRepository.deleteById(id);
+        return "Review with id " + id + " has been deleted!";
     }  
 }

@@ -23,14 +23,11 @@ public class UserService {
         // Check if username or email already exists
         Optional<User> userCheckPhone = userRepository.findByPhone(user.getPhoneNumber());
         Optional<User> userCheckEmail = userRepository.findByEmail(user.getEmail());
-        if(userCheckPhone.isPresent()) {
+        if (userCheckPhone.isPresent()) {
             return userCheckPhone.get();
-        }
-        else if(userCheckEmail.isPresent()) {
+        } else if (userCheckEmail.isPresent()) {
             return userCheckEmail.get();
-        }
-        else
-        {
+        } else {
             return userRepository.save(user);
         }
     }
@@ -62,5 +59,17 @@ public class UserService {
             listUserDTO.add(userDTO);
         }
         return listUserDTO;
+    }
+
+    public User updateUser(String id, User user) {
+        User userUpdate = userRepository.findById(id).get();
+        userUpdate.setUsername(user.getUsername());
+        userUpdate.setFullName(user.getFullName());
+        userUpdate.setPhoneNumber(user.getPhoneNumber());
+        userUpdate.setEmail(user.getEmail());
+        userUpdate.setPassword(user.getPassword());
+        userUpdate.setRoleId(user.getRoleId());
+
+        return userRepository.save(userUpdate);
     }
 }
